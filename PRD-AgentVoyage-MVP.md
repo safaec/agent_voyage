@@ -14,6 +14,7 @@
 Personne souhaitant planifier un voyage mais submergée par la quantité d'informations disponibles en ligne. Elle veut des recommandations personnalisées sans passer des heures sur différents sites de comparaison.
 
 **Their Current Pain:**
+
 - Passer des heures à comparer les vols sur plusieurs sites
 - Difficulté à trouver des hôtels qui correspondent vraiment à leur style
 - Ne pas savoir quelles activités correspondent à leur "vibe" de voyage
@@ -21,6 +22,7 @@ Personne souhaitant planifier un voyage mais submergée par la quantité d'infor
 - Informations dispersées nécessitant de jongler entre 10+ onglets
 
 **What They Need:**
+
 - Un assistant qui comprend leur style de voyage (détente, aventure, culture, gastronomie)
 - Des recommandations de vols avec les meilleures périodes tarifaires
 - Des suggestions d'hôtels diversifiées (meilleur rapport qualité-prix, expérience unique, pratique)
@@ -38,6 +40,7 @@ La planification de voyage est fragmentée et chronophage. Les voyageurs doivent
 Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui travaillent ensemble pour créer un itinéraire complet et personnalisé en quelques minutes.
 
 **Why Existing Solutions Fall Short:**
+
 - **Google Travel / TripAdvisor:** Agrègent des données mais ne personnalisent pas selon le "vibe" du voyageur
 - **Agences en ligne (Expedia, Kayak):** Focalisées sur la transaction, pas sur la curation d'expérience
 - **Travel bloggers:** Contenu générique, pas adapté aux dates/budget spécifiques
@@ -72,6 +75,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 ### 🔴 Must Have for Launch
 
 #### 1. Interface de Chat Conversationnelle
+
 - **What:** Interface web permettant de dialoguer avec l'assistant voyage
 - **User Story:** As a voyageur, I want to décrire mon voyage en langage naturel so that je n'ai pas à remplir des formulaires complexes
 - **Success Criteria:**
@@ -81,6 +85,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 - **Priority:** P0 (Critical)
 
 #### 2. Système de Profilage en 5 Questions
+
 - **What:** Collecte structurée des informations essentielles (destination, dates, budget, voyageurs, vibe)
 - **User Story:** As a voyageur, I want to répondre à quelques questions clés so that l'assistant comprenne exactement ce que je recherche
 - **Success Criteria:**
@@ -90,6 +95,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 - **Priority:** P0 (Critical)
 
 #### 3. Génération d'Itinéraire Complet
+
 - **What:** Rapport structuré incluant contexte culturel, vols, hôtels (3 options), et activités
 - **User Story:** As a voyageur, I want to recevoir un itinéraire complet so that j'ai toutes les informations pour planifier mon voyage
 - **Success Criteria:**
@@ -101,6 +107,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 - **Priority:** P0 (Critical)
 
 #### 4. Recherche Web en Temps Réel (Vols & Hôtels)
+
 - **What:** Les agents SYS_02 et SYS_03 utilisent la recherche web pour des prix actualisés
 - **User Story:** As a voyageur, I want to avoir des prix réels et actuels so that je puisse faire confiance aux estimations budgétaires
 - **Success Criteria:**
@@ -110,6 +117,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 - **Priority:** P0 (Critical)
 
 #### 5. Gestion des Modifications (Follow-up)
+
 - **What:** Système de triage permettant d'ajuster l'itinéraire après génération
 - **User Story:** As a voyageur, I want to pouvoir demander des ajustements so that l'itinéraire corresponde parfaitement à mes besoins
 - **Success Criteria:**
@@ -119,11 +127,13 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 - **Priority:** P0 (Critical)
 
 ### 🟡 Nice to Have (If Time Allows)
+
 - **Export PDF:** Télécharger l'itinéraire en format imprimable
 - **Historique des voyages:** Sauvegarder les itinéraires générés
 - **Mode sombre:** Interface adaptée aux préférences visuelles
 
 ### 🚫 NOT in MVP (Saving for Later)
+
 - **Réservation intégrée:** Will add after validation du concept - complexité juridique et partenariats requis
 - **Compte utilisateur:** Will add after avoir des utilisateurs récurrents - overkill pour un portfolio
 - **Multi-langue:** Will add after le marché francophone validé
@@ -134,6 +144,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 ## 📊 How We'll Know It's Working
 
 ### Launch Success Metrics (First 30 Days)
+
 | Metric | Target | Measure |
 |--------|--------|---------|
 | Itinéraires générés | 50+ | Compteur dans l'app |
@@ -141,6 +152,7 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 | Feedback positif | >4/5 étoiles | Sondage simple en fin de session |
 
 ### Growth Metrics (Months 2-3)
+
 | Metric | Target | Measure |
 |--------|--------|---------|
 | Visiteurs uniques | 200+ | Analytics |
@@ -151,11 +163,13 @@ Agent Voyage centralise cette expertise grâce à 5 agents IA spécialisés qui 
 **Design Vibe:** Chaleureux, inspirant, voyage
 
 **Visual Principles:**
+
 1. **Évocateur:** Couleurs et visuels qui inspirent l'évasion (tons chauds, images de destinations)
 2. **Accessible:** Interface claire même pour les non-technophiles
 3. **Confiant:** Design professionnel qui inspire la confiance dans les recommandations
 
 **Key Screens/Pages:**
+
 1. **Page d'accueil:** Hero inspirant + CTA "Planifier mon voyage"
 2. **Interface Chat:** Zone de conversation + affichage structuré des résultats
 3. **Rapport Final:** Itinéraire complet avec sections clairement délimitées
@@ -235,6 +249,7 @@ Le système repose sur 5 agents spécialisés orchestrés par Claude Projects :
 | **SYS_04 - Activités** | Planification itinéraire | Non |
 
 **Flux d'exécution:**
+
 ```
 Utilisateur → Profilage (5 questions) →
 Culture → Vols → Hôtels → Activités →
@@ -244,6 +259,7 @@ Rapport Final → Follow-up (si besoin)
 ## 🛡️ Quality Standards
 
 **What This App Will NOT Accept:**
+
 - Placeholder content in production ("Lorem ipsum", sample images)
 - Prix inventés - toujours indiquer "Prix non disponible" si recherche échoue
 - Broken features—everything listed works or isn't included
@@ -257,6 +273,7 @@ Rapport Final → Follow-up (si besoin)
 
 **Development Budget:** Minimal - utilisation d'outils gratuits/freemium
 **Monthly Operating:**
+
 - Hébergement: $0 (Vercel/Netlify free tier)
 - API Claude: Variable selon usage (crédits gratuits initiaux)
 - Domaine (optionnel): ~$12/an
@@ -267,11 +284,13 @@ Rapport Final → Follow-up (si besoin)
 ## ❓ Open Questions & Assumptions
 
 **Open Questions:**
+
 - Quel framework frontend utiliser ? (Next.js vs Nuxt vs autre)
 - Comment exposer les agents Claude en API ? (Claude Projects API vs implémentation custom)
 - Faut-il un backend ou tout peut être client-side + API Claude ?
 
 **Assumptions:**
+
 - Les utilisateurs accepteront de répondre à 5 questions avant d'avoir des résultats
 - La recherche web de Claude est suffisamment fiable pour les prix vols/hôtels
 - Le format de rapport en sections est plus utile qu'un planning jour par jour
@@ -286,6 +305,7 @@ Rapport Final → Follow-up (si besoin)
 ## ✅ Definition of Done for MVP
 
 The MVP is ready to launch when:
+
 - [ ] Interface chat fonctionnelle et responsive
 - [ ] Profilage en 5 questions opérationnel
 - [ ] Les 5 agents génèrent leurs sections respectives
@@ -301,6 +321,7 @@ The MVP is ready to launch when:
 ## 📝 Next Steps
 
 After this PRD is approved:
+
 1. Create Technical Design Document (Part III)
 2. Set up development environment
 3. Build MVP with AI assistance
