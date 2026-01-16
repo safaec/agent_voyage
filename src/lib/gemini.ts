@@ -15,7 +15,7 @@ export async function chat(
     throw new Error('Clé API Gemini non configurée')
   }
 
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
   // Convertir les messages au format Gemini
   const history = messages.slice(0, -1).map((msg) => ({

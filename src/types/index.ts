@@ -17,4 +17,18 @@ export interface TravelProfile {
   budget: string | null
   travelers: string | null
   vibe: string | null
+  isComplete: boolean
+  isConfirmed: boolean
+}
+
+export type ProfilingPhase =
+  | 'collecting'    // En train de collecter les infos
+  | 'confirming'    // Demande de confirmation
+  | 'confirmed'     // Profil confirmé, prêt pour génération
+  | 'generating'    // Génération de l'itinéraire en cours
+
+export interface ConversationState {
+  phase: ProfilingPhase
+  profile: TravelProfile
+  messages: Message[]
 }

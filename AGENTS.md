@@ -4,7 +4,7 @@
 **App:** Agent Voyage
 **Goal:** Assistant de voyage IA qui crée des itinéraires personnalisés en 5 questions
 **Stack:** Next.js 14 + Gemini API + Tailwind CSS + Vercel
-**Current Phase:** Phase 3 - Profilage 5 Questions
+**Current Phase:** Phase 5 - Rapport Final
 
 ## How I Should Think
 1. **Understand Intent First**: Avant de répondre, identifier ce que l'utilisateur veut vraiment
@@ -28,8 +28,8 @@ Refer to these for details (load only when needed):
 
 ## Current State (Update This!)
 **Last Updated:** 16 janvier 2026
-**Working On:** Phase 3 - Profilage 5 Questions
-**Recently Completed:** Phase 2 - Chat Interface (ChatInterface, MessageBubble, API /api/chat, Gemini client)
+**Working On:** Phase 5 - Rapport Final
+**Recently Completed:** Phase 4 - Agents Spécialisés (culture.ts, flights.ts, hotels.ts, activities.ts, API /api/generate)
 **Blocked By:** None
 
 ## Roadmap
@@ -48,17 +48,17 @@ Refer to these for details (load only when needed):
 - [x] Connecter frontend → backend → Gemini
 - [x] Tester conversation basique
 
-### Phase 3: Profilage 5 Questions (Semaine 1-2)
-- [ ] Implémenter logique orchestrator (SYS_00)
-- [ ] Extraction des réponses utilisateur via Gemini
-- [ ] Flux conversationnel des 5 questions
-- [ ] Confirmation du profil avant génération
+### Phase 3: Profilage 5 Questions (Semaine 1-2) ✅
+- [x] Implémenter logique orchestrator (SYS_00)
+- [x] Extraction des réponses utilisateur via Gemini
+- [x] Flux conversationnel des 5 questions
+- [x] Confirmation du profil avant génération
 
-### Phase 4: Agents Spécialisés (Semaine 2)
-- [ ] SYS_01 Culture - Contexte culturel destination
-- [ ] SYS_02 Vols - Avec Google Search Grounding
-- [ ] SYS_03 Hôtels - Avec Google Search Grounding
-- [ ] SYS_04 Activités - Planning adapté au vibe
+### Phase 4: Agents Spécialisés (Semaine 2) ✅
+- [x] SYS_01 Culture - Contexte culturel destination
+- [x] SYS_02 Vols - Avec Google Search Grounding
+- [x] SYS_03 Hôtels - Avec Google Search Grounding
+- [x] SYS_04 Activités - Planning adapté au vibe
 
 ### Phase 5: Rapport Final (Semaine 2)
 - [ ] Composant ItineraryReport.tsx
