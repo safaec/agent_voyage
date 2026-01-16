@@ -4,7 +4,7 @@
 **App:** Agent Voyage
 **Goal:** Assistant de voyage IA qui crée des itinéraires personnalisés en 5 questions
 **Stack:** Next.js 14 + Gemini API + Tailwind CSS + Vercel
-**Current Phase:** Phase 2 - Chat Interface
+**Current Phase:** Phase 3 - Profilage 5 Questions
 
 ## How I Should Think
 1. **Understand Intent First**: Avant de répondre, identifier ce que l'utilisateur veut vraiment
@@ -28,8 +28,8 @@ Refer to these for details (load only when needed):
 
 ## Current State (Update This!)
 **Last Updated:** 16 janvier 2026
-**Working On:** Phase 2 - Chat Interface
-**Recently Completed:** Phase 1 - Foundation (Next.js, Tailwind, shadcn/ui, page d'accueil)
+**Working On:** Phase 3 - Profilage 5 Questions
+**Recently Completed:** Phase 2 - Chat Interface (ChatInterface, MessageBubble, API /api/chat, Gemini client)
 **Blocked By:** None
 
 ## Roadmap
@@ -41,12 +41,12 @@ Refer to these for details (load only when needed):
 - [ ] Premier déploiement Vercel "Hello World"
 - [x] Installer shadcn/ui pour les composants
 
-### Phase 2: Chat Interface (Semaine 1)
-- [ ] Créer composant ChatInterface.tsx
-- [ ] Créer composant MessageBubble.tsx
-- [ ] Créer API route /api/chat
-- [ ] Connecter frontend → backend → Gemini
-- [ ] Tester conversation basique
+### Phase 2: Chat Interface (Semaine 1) ✅
+- [x] Créer composant ChatInterface.tsx
+- [x] Créer composant MessageBubble.tsx
+- [x] Créer API route /api/chat
+- [x] Connecter frontend → backend → Gemini
+- [x] Tester conversation basique
 
 ### Phase 3: Profilage 5 Questions (Semaine 1-2)
 - [ ] Implémenter logique orchestrator (SYS_00)

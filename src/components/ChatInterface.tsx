@@ -1,0 +1,146 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { Message } from '@/types'
+import { MessageBubble } from './MessageBubble'
+
+const WELCOME_MESSAGE: Message = {
+  id: 'welcome',
+  role: 'assistant',
+  content: `Bonjour ! Je suis votre assistant de voyage. 🌍
+
+Je vais vous aider à créer un itinéraire personnalisé en vous posant quelques questions simples.
+
+Pour commencer, quelle destination vous fait rêver ?`,
+  timestamp: new Date(),
+}
+
+export function ChatInterface() {
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: input.trim(),
+      timestamp: new Date(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setInput('')
+    setIsLoading(true)
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Erreur de connexion')
+      }
+
+      const data = await response.json()
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: data.response,
+        timestamp: new Date(),
+      }
+
+      setMessages((prev) => [...prev, assistantMessage])
+    } catch (error) {
+      console.error('Erreur:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: "Désolé, une erreur s'est produite. Veuillez réessayer.",
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-col h-screen bg-white">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-4 shadow-md">
+        <div className="max-w-3xl mx-auto flex items-center gap-3">
+          <span className="text-2xl">✈️</span>
+          <div>
+            <h1 className="font-semibold text-lg">Agent Voyage</h1>
+            <p className="text-blue-100 text-sm">Votre assistant de voyage intelligent</p>
+          </div>
+        </div>
+      </header>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-4 py-6">
+        <div className="max-w-3xl mx-auto">
+          {messages.map((message) => (
+            <MessageBubble key={message.id} message={message} />
+          ))}
+          {isLoading && (
+            <div className="flex justify-start mb-4">
+              <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">✈️</span>
+                  <div className="flex gap-1">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
+                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.1s]" />
+                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.2s]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </div>
+
+      {/* Input */}
+      <div className="border-t bg-white px-4 py-4">
+        <form onSubmit={sendMessage} className="max-w-3xl mx-auto flex gap-3">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Écrivez votre message..."
+            className="flex-1 border border-gray-300 rounded-full px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+            disabled={isLoading}
+          />
+          <button
+            type="submit"
+            disabled={isLoading || !input.trim()}
+            className="bg-blue-500 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            Envoyer
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
