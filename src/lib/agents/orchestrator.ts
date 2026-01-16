@@ -1,5 +1,6 @@
 import { TravelProfile } from '@/types'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GEMINI_MODEL } from '../geminiConfig'
 
 const apiKey = process.env.GOOGLE_API_KEY
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
@@ -38,7 +39,7 @@ export async function extractProfile(
     return EMPTY_PROFILE
   }
 
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
 
   // Préparer le contexte de conversation
   const conversationText = messages

@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GEMINI_MODEL } from './geminiConfig'
 
 const apiKey = process.env.GOOGLE_API_KEY
 
@@ -15,7 +16,7 @@ export async function chat(
     throw new Error('Clé API Gemini non configurée')
   }
 
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
 
   // Convertir les messages au format Gemini
   const history = messages.slice(0, -1).map((msg) => ({

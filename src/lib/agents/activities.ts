@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { TravelProfile } from '@/types'
+import { GEMINI_MODEL } from '../geminiConfig'
 
 const apiKey = process.env.GOOGLE_API_KEY
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
@@ -76,7 +77,7 @@ export async function generateActivitiesInfo(profile: TravelProfile): Promise<Ac
     return { ...emptyResult, error: 'Destination manquante' }
   }
 
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
 
   const prompt = ACTIVITIES_PROMPT
     .replace('{DESTINATION}', profile.destination)
