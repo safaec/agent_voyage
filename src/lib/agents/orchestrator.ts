@@ -1,9 +1,9 @@
 import { TravelProfile } from '@/types'
-import { GoogleGenerativeAI } from '@google/generative-ai'
-import { GEMINI_MODEL } from '../geminiConfig'
+import Groq from 'groq-sdk'
+import { GROQ_MODEL } from '../groqConfig'
 
-const apiKey = process.env.GOOGLE_API_KEY
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
+const apiKey = process.env.GROQ_API_KEY
+const groq = apiKey ? new Groq({ apiKey }) : null
 
 const EMPTY_PROFILE: TravelProfile = {
   destination: null,
@@ -35,11 +35,9 @@ Format de sortie EXACT:
 export async function extractProfile(
   messages: { role: 'user' | 'assistant'; content: string }[]
 ): Promise<TravelProfile> {
-  if (!genAI) {
+  if (!groq) {
     return EMPTY_PROFILE
   }
-
-  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
 
   // Préparer le contexte de conversation
   const conversationText = messages
@@ -54,8 +52,14 @@ ${conversationText}
 JSON:`
 
   try {
-    const result = await model.generateContent(prompt)
-    const text = result.response.text().trim()
+    const completion = await groq.chat.completions.create({
+      model: GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 500,
+      temperature: 0,
+    })
+
+    const text = completion.choices[0]?.message?.content?.trim() || ''
 
     // Nettoyer le texte pour extraire le JSON
     const jsonMatch = text.match(/\{[\s\S]*\}/)

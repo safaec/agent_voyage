@@ -32,3 +32,55 @@ export interface ConversationState {
   profile: TravelProfile
   messages: Message[]
 }
+
+// Types pour les agents spécialisés
+export interface CultureResult {
+  content: string
+  success: boolean
+  error?: string
+}
+
+export interface FlightsResult {
+  periode: string
+  prix: string
+  compagnies: string
+  conseil: string
+  success: boolean
+  error?: string
+}
+
+export interface Hotel {
+  type: string
+  nom: string
+  quartier: string
+  prix: string
+  points_forts: string
+}
+
+export interface HotelsResult {
+  hotels: Hotel[]
+  success: boolean
+  error?: string
+}
+
+export interface Activity {
+  type: string
+  nom: string
+  description: string
+  prix: string
+}
+
+export interface ActivitiesResult {
+  activites: Activity[]
+  restaurants: Activity[]
+  conseil: string
+  success: boolean
+  error?: string
+}
+
+export interface ItineraryData {
+  culture: CultureResult
+  flights: FlightsResult
+  hotels: HotelsResult
+  activities: ActivitiesResult
+}

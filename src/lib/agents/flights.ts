@@ -1,9 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import Groq from 'groq-sdk'
 import { TravelProfile } from '@/types'
-import { GEMINI_MODEL } from '../geminiConfig'
+import { GROQ_MODEL } from '../groqConfig'
 
-const apiKey = process.env.GOOGLE_API_KEY
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
+const apiKey = process.env.GROQ_API_KEY
+const groq = apiKey ? new Groq({ apiKey }) : null
 
 const FLIGHTS_PROMPT = `Tu es un expert en yield management aérien. Analyse les vols vers la destination.
 
@@ -51,15 +51,13 @@ export async function generateFlightsInfo(profile: TravelProfile): Promise<Fligh
     success: false,
   }
 
-  if (!genAI) {
-    return { ...emptyResult, error: 'API Gemini non configurée' }
+  if (!groq) {
+    return { ...emptyResult, error: 'API Groq non configurée' }
   }
 
   if (!profile.destination) {
     return { ...emptyResult, error: 'Destination manquante' }
   }
-
-  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
 
   const prompt = FLIGHTS_PROMPT
     .replace('{DESTINATION}', profile.destination)
@@ -67,8 +65,14 @@ export async function generateFlightsInfo(profile: TravelProfile): Promise<Fligh
     .replace('{BUDGET}', profile.budget || 'confort')
 
   try {
-    const result = await model.generateContent(prompt)
-    const text = result.response.text().trim()
+    const completion = await groq.chat.completions.create({
+      model: GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 500,
+      temperature: 0.5,
+    })
+
+    const text = completion.choices[0]?.message?.content?.trim() || ''
 
     // Extraire le JSON
     const jsonMatch = text.match(/\{[\s\S]*\}/)

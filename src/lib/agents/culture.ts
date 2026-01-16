@@ -1,9 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import Groq from 'groq-sdk'
 import { TravelProfile } from '@/types'
-import { GEMINI_MODEL } from '../geminiConfig'
+import { GROQ_MODEL } from '../groqConfig'
 
-const apiKey = process.env.GOOGLE_API_KEY
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
+const apiKey = process.env.GROQ_API_KEY
+const groq = apiKey ? new Groq({ apiKey }) : null
 
 const CULTURE_PROMPT = `Tu es un expert en culture et géopolitique. Fournis un résumé dense et engageant sur la destination.
 
@@ -29,11 +29,11 @@ export interface CultureResult {
 }
 
 export async function generateCultureContext(profile: TravelProfile): Promise<CultureResult> {
-  if (!genAI) {
+  if (!groq) {
     return {
       content: '',
       success: false,
-      error: 'API Gemini non configurée',
+      error: 'API Groq non configurée',
     }
   }
 
@@ -45,16 +45,20 @@ export async function generateCultureContext(profile: TravelProfile): Promise<Cu
     }
   }
 
-  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
-
   const prompt = CULTURE_PROMPT
     .replace('{DESTINATION}', profile.destination)
     .replace('{DATES}', profile.dates || 'non précisée')
     .replace('{TRAVELERS}', profile.travelers || 'non précisé')
 
   try {
-    const result = await model.generateContent(prompt)
-    const text = result.response.text().trim()
+    const completion = await groq.chat.completions.create({
+      model: GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 500,
+      temperature: 0.7,
+    })
+
+    const text = completion.choices[0]?.message?.content?.trim() || ''
 
     return {
       content: text,
