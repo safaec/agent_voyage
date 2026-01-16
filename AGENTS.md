@@ -4,7 +4,7 @@
 **App:** Agent Voyage
 **Goal:** Assistant de voyage IA qui crée des itinéraires personnalisés en 5 questions
 **Stack:** Next.js 14 + Gemini API + Tailwind CSS + Vercel
-**Current Phase:** Phase 1 - Foundation
+**Current Phase:** Phase 2 - Chat Interface
 
 ## How I Should Think
 1. **Understand Intent First**: Avant de répondre, identifier ce que l'utilisateur veut vraiment
@@ -28,18 +28,18 @@ Refer to these for details (load only when needed):
 
 ## Current State (Update This!)
 **Last Updated:** 16 janvier 2026
-**Working On:** Initialisation du projet
-**Recently Completed:** Documentation agents créée
+**Working On:** Phase 2 - Chat Interface
+**Recently Completed:** Phase 1 - Foundation (Next.js, Tailwind, shadcn/ui, page d'accueil)
 **Blocked By:** None
 
 ## Roadmap
 
-### Phase 1: Foundation (Semaine 1)
-- [ ] Initialiser projet Next.js avec TypeScript + Tailwind
-- [ ] Configurer .env.local avec clé API Gemini
-- [ ] Créer page d'accueil avec design voyage
+### Phase 1: Foundation (Semaine 1) ✅
+- [x] Initialiser projet Next.js avec TypeScript + Tailwind
+- [x] Configurer .env.local avec clé API Gemini
+- [x] Créer page d'accueil avec design voyage
 - [ ] Premier déploiement Vercel "Hello World"
-- [ ] Installer shadcn/ui pour les composants
+- [x] Installer shadcn/ui pour les composants
 
 ### Phase 2: Chat Interface (Semaine 1)
 - [ ] Créer composant ChatInterface.tsx
